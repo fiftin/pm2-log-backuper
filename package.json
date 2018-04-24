@@ -14,7 +14,7 @@
   "config": {
     "appsToBackup": "media_saver,media_transcoder",
     "logsPath": "/home/ec2-user/.pm2/logs",
-    "backupsPath": "/tmp"
+    "backupsPath": "/home/ec2-user"
   },
   "apps": [
     {
