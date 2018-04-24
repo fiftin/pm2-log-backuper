@@ -12,8 +12,9 @@
     "url": "https://github.com/keymetrics/pmx.git"
   },
   "config": {
-    "conf_var_1": true,
-    "conf_var_2": "myvalue"
+    "apps": "",
+    "logsPath": "~/.pm2/logs",
+    "backupsPath": "~/"
   },
   "apps": [
     {
