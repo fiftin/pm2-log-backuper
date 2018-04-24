@@ -182,7 +182,6 @@ pmx.initModule({
         }).filter(function (app) { // filter apps for which backups are required
           return !!app && appsToBackup.indexOf(app) >= 0;
         }).forEach(function (app) { // copy logs to backups folder
-          console.log('App ' + app + ' has been stopped. Backuping logs...');
           var date = new Date();
           var dateStr = '' +
             date.getFullYear() + '-' +
@@ -194,9 +193,11 @@ pmx.initModule({
           var backupFileName = path.join(conf.backupsPath,  dateStr + '_' + app + '.log');
 
           if (fs.existsSync(backupFileName)) {
+            console.log('Backup for app ' + app + ' created less minute ago. Skipped.');
             return;
           }
 
+          console.log('App ' + app + ' has been stopped. Backuping logs...');
           fs.createReadStream(path.join(conf.logsPath, app + '.log'))
             .pipe(fs.createWriteStream(backupFileName));
         });
