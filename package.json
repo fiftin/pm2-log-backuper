@@ -1,6 +1,6 @@
 {
   "name": "pm2-log-backuper",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "PM2 Sample Module",
   "main": "app.js",
   "dependencies": {
@@ -13,8 +13,8 @@
   },
   "config": {
     "appsToBackup": "app1,app2",
-    "logsPath": "~/.pm2/logs",
-    "backupsPath": "~/"
+    "logsPath": "/home/ec2-user/.pm2/logs",
+    "backupsPath": "/tmp"
   },
   "apps": [
     {

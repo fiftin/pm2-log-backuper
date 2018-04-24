@@ -183,8 +183,16 @@ pmx.initModule({
           return !!app && appsToBackup.indexOf(app) >= 0;
         }).forEach(function (app) { // copy logs to backups folder
           console.log('App ' + app + ' has been stopped. Backuping logs...');
+          var date = new Date();
+          var dateStr = '' +
+            date.getFullYear() + '-' +
+            (date.getMonth() + 1)  +'-' +
+            date.getDate() + '_' +
+            date.getHours() + '-' +
+            date.getMinutes();
+
           fs.createReadStream(path.join(conf.logsPath, app + '.log'))
-            .pipe(fs.createWriteStream(path.join(conf.backupsPath, app + '.log')));
+            .pipe(fs.createWriteStream(path.join(conf.backupsPath,  dateStr + '_' + app + '.log')));
         });
       });
     });
