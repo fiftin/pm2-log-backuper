@@ -1,5 +1,8 @@
 
 var pmx = require('pmx');
+var pm2 = require('pm2');
+var fs = require('fs');
+var path = require('path');
 
 /******************************
  *    ______ _______ ______
@@ -67,6 +70,9 @@ pmx.initModule({
   }
 
 }, function(err, conf) {
+  ['apps', 'logsPath', 'backupsPath'].forEach(function(option) {
+    throw new Error('Required option "' + option + '" is not set');
+  });
 
   /**
    * Module specifics like connecting to a database and
@@ -157,5 +163,33 @@ pmx.initModule({
 
   });
 
+  pm2.connect(function(err) {
+    if (err) {
+      console.error(err);
+      return;
+    }
 
+    console.log('info', 'PM2: listening logs');
+
+    pm2.launchBus(function (err, bus) {
+      if (err) {
+        console.log('error', err);
+        return;
+      }
+
+      bus.on('log:PM2', function (log) {
+        var appsToBackup = conf.apps.split(',');
+
+        log.split(/[\r\n]+/g).map(function (line) { // split log to lines and find lines by regex
+          var match = /App \[([\w\d-_]+)\] with id [\d+] and pid [\d+], exited with code [\d+] via signal [(\w+)]/.exec(line);
+          return match && match[1];
+        }).filter(function (app) { // filter apps for which backups are required
+          return !!app && appsToBackup.indexOf(app) >= 0;
+        }).forEach(function (app) { // copy logs to backups folder
+          fs.createReadStream(path.join(conf.logsPath, app + '.log'))
+            .pipe(fs.createWriteStream(path.join(conf.backupsPath, app + '.log')));
+        });
+      });
+    });
+  });
 });
