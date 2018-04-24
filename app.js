@@ -176,7 +176,8 @@ pmx.initModule({
       }
 
       bus.on('log:PM2', function (log) {
-        log.split(/[\r\n]+/g).map(function (line) { // split log to lines and find lines by regex
+        console.log(log);
+        log.data.split(/[\r\n]+/g).map(function (line) { // split log to lines and find lines by regex
           var match = /App \[([\w\d-_]+)\] with id [\d+] and pid [\d+], exited with code [\d+] via signal [(\w+)]/.exec(line);
           return match && match[1];
         }).filter(function (app) { // filter apps for which backups are required
