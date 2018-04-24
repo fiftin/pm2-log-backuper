@@ -12,7 +12,7 @@
     "url": "https://github.com/keymetrics/pmx.git"
   },
   "config": {
-    "appsToBackup": "test",
+    "appsToBackup": "app1,app2",
     "logsPath": "~/.pm2/logs",
     "backupsPath": "~/"
   },
