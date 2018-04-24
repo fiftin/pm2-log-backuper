@@ -191,8 +191,14 @@ pmx.initModule({
             date.getHours() + '-' +
             date.getMinutes();
 
+          var backupFileName = path.join(conf.backupsPath,  dateStr + '_' + app + '.log');
+
+          if (fs.existsSync(backupFileName)) {
+            return;
+          }
+
           fs.createReadStream(path.join(conf.logsPath, app + '.log'))
-            .pipe(fs.createWriteStream(path.join(conf.backupsPath,  dateStr + '_' + app + '.log')));
+            .pipe(fs.createWriteStream(backupFileName));
         });
       });
     });
