@@ -1,6 +1,6 @@
 {
   "name": "pm2-log-backuper",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "PM2 Sample Module",
   "main": "app.js",
   "dependencies": {

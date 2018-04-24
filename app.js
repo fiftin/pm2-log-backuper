@@ -176,13 +176,13 @@ pmx.initModule({
       }
 
       bus.on('log:PM2', function (log) {
-        console.log(log);
         log.data.split(/[\r\n]+/g).map(function (line) { // split log to lines and find lines by regex
-          var match = /App \[([\w\d-_]+)\] with id [\d+] and pid [\d+], exited with code [\d+] via signal [(\w+)]/.exec(line);
+          var match = /App \[([\w\d-_]+)\] with id \[\d+\] and pid \[\d+\], exited with code \[\d+\] via signal \[(\w+)\]/.exec(line);
           return match && match[1];
         }).filter(function (app) { // filter apps for which backups are required
           return !!app && appsToBackup.indexOf(app) >= 0;
         }).forEach(function (app) { // copy logs to backups folder
+          console.log('App ' + app + ' has been stopped. Backuping logs...');
           fs.createReadStream(path.join(conf.logsPath, app + '.log'))
             .pipe(fs.createWriteStream(path.join(conf.backupsPath, app + '.log')));
         });
