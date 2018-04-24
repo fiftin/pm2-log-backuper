@@ -12,7 +12,7 @@
     "url": "https://github.com/keymetrics/pmx.git"
   },
   "config": {
-    "appsToBackup": "app1,app2",
+    "appsToBackup": "media_saver,media_transcoder",
     "logsPath": "/home/ec2-user/.pm2/logs",
     "backupsPath": "/tmp"
   },
