@@ -1,6 +1,6 @@
 {
   "name": "pm2-log-backuper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "PM2 Sample Module",
   "main": "app.js",
   "dependencies": {
@@ -12,7 +12,7 @@
     "url": "https://github.com/keymetrics/pmx.git"
   },
   "config": {
-    "apps": " ",
+    "appsToBackup": " ",
     "logsPath": "~/.pm2/logs",
     "backupsPath": "~/"
   },

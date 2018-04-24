@@ -70,13 +70,7 @@ pmx.initModule({
   }
 
 }, function(err, conf) {
-  ['apps', 'logsPath', 'backupsPath'].forEach(function(option) {
-    if (!conf[option]) {
-      throw new Error('Required option "' + option + '" is not set');
-    }
-  });
-
-  var appsToBackup = conf.apps.trim() === '' ? [] : conf.apps.split(',').map(function (app) { return app.trim(); });
+  var appsToBackup = conf.appsToBackup.trim() === '' ? [] : conf.appsToBackup.split(',').map(function (app) { return app.trim(); });
 
   /**
    * Module specifics like connecting to a database and
